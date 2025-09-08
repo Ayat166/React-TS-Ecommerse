@@ -1,4 +1,4 @@
-import type { IProduct } from "../interfaces";
+import type { IFormInput, IProduct } from "../interfaces";
 
 export const products : IProduct []= [
     {
@@ -80,4 +80,35 @@ export const products : IProduct []= [
         }
     }
     
+]
+
+export const formInputList: IFormInput[] = [
+    {
+        id: "title",
+        name: "title",
+        label: "Product Title",
+        type: "text",
+        placeholder: "Enter product title"
+    },
+    {
+        id: "price",
+        name: "price",
+        label: "Price",
+        type: "number",
+        placeholder: "Enter product price"
+    },
+    {
+        id: "description",
+        name: "description",
+        label: "Description",
+        type: "text",
+        placeholder: "Enter product description"
+    },
+    {
+        id: "image",
+        name: "imageUrl",
+        label: "Product Image URL",
+        type: "text",
+        placeholder: "Enter product image URL"
+    },
 ]

@@ -1,5 +1,5 @@
 export interface IProduct {
-    id: number;
+    id?: number;
     title: string;
     price: number;
     description: string;
@@ -11,4 +11,12 @@ export interface ICategory {
     id: number;
     name: string;
     imageUrl: string;
+}
+
+export interface IFormInput {
+    id:string;
+    name: "title" | "price" | "description" | "imageUrl";
+    label: string;
+    type: string;
+    placeholder: string;
 }
