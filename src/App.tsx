@@ -23,7 +23,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(emptyProduct);
   const [productListState, setProductListState] = useState(products);
-  const [tempColor, setTempColor] = useState<string>("");
+  const [tempColor, setTempColor] = useState<string[]>([]);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -68,7 +68,11 @@ function App() {
       ...prev,
       [name]: value,
     }));
-    console.log(product);
+    // console.log(product);
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
   }
 
   function handleAddProduct() {
@@ -86,11 +90,23 @@ function App() {
     const newProduct = {
       id: productListState.length + 1,
       ...product,
+      colors: tempColor,
     };
     console.log(newProduct);
+    setTempColor([]);
     setProductListState((prev) => [...prev, newProduct]);
     setProduct(emptyProduct);
     close();
+  }
+  function toggleColor(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) {
+    const selectedColor = e.currentTarget.style.backgroundColor;
+    setTempColor((prev) => {
+      if (prev.includes(selectedColor)) {
+        return prev.filter((color) => color !== selectedColor);
+      } else {
+        return [...prev, selectedColor];
+      }     
+    })
   }
 
   return (
@@ -108,9 +124,21 @@ function App() {
 
         <Modal isOpen={isOpen} close={close}>
           {renderFormInputs}
+          {tempColor && (
+            <div className="flex space-x-2 mt-2">
+              <p className="self-center">Selected Colors:</p>
+              {tempColor.map((color) => (
+                <ColorComponent
+                  color={color}
+                  key={color}
+                  onClick={toggleColor}
+                />
+              ))}
+            </div>
+          )}
           <div className="flex space-x-2 mt-2">
             {colors.map((color) => (
-              <ColorComponent color={color} key={color} />
+              <ColorComponent color={color} key={color} onClick={toggleColor}/>
             ))}
           </div>
           <div className="mt-4">
@@ -118,7 +146,7 @@ function App() {
               className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"
               onClick={handleAddProduct}
             >
-              submit
+              Submit
             </Button>
           </div>
         </Modal>
