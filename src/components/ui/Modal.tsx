@@ -1,5 +1,4 @@
 import { Dialog, DialogPanel ,DialogTitle} from '@headlessui/react'
-import Button from "./Button";
 
 interface ModalProps {
     isOpen: boolean;
@@ -27,14 +26,7 @@ function Modal({isOpen,close,children}:ModalProps) {
                 order.
               </p> */}
               {children}
-              <div className="mt-4">
-                <Button
-                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
-                  onClick={close}
-                >
-                  submit
-                </Button>
-              </div>
+             
             </DialogPanel>
           </div>
         </div>

@@ -1,25 +1,30 @@
 import ProductCard from "./components/ProductCard";
-import Modal from "./components/ui/modal";
+import Modal from "./components/ui/Modal";
 import { formInputList, products } from "./data";
 import Button from "./components/ui/Button";
 import { useState } from "react";
 import Input from "./components/ui/Input";
 import type { IProduct } from "./interfaces";
+import FormValidation from "./validations";
 
 function App() {
-  /*-------- Modal State --------*/
-  const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState<IProduct>({
+  /*-------- Empty Product Template --------*/
+  const emptyProduct: IProduct = {
     title: "",
-    price: 0,
+    price: "",
     description: "",
     imageUrl: "",
     colors: [],
     category: { id: 0, name: "", imageUrl: "" },
-  });
+  };
+
+  /*-------- Modal State --------*/
+  const [isOpen, setIsOpen] = useState(false);
+  const [product, setProduct] = useState<IProduct>(emptyProduct);
+  const [productListState, setProductListState] = useState(products);
 
   /*-------- Render --------*/
-  const productList = products.map((product) => (
+  const productList = productListState.map((product) => (
     <ProductCard key={product.id} product={product} />
   ));
   const renderFormInputs = formInputList.map((input) => (
@@ -53,9 +58,31 @@ function App() {
     const { name, value } = e.target;
     setProduct((prev) => ({
       ...prev,
-      [name]: name === "price" ? parseFloat(value) : value,
+      [name]: value,
     }));
     console.log(product);
+  }
+
+  function handleAddProduct() {
+    const errors = FormValidation({
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+    });  
+    console.log(errors);
+    if (Object.values(errors).some((error) => error !== "")){
+      console.log("Validation failed. Please correct the errors and try again.");
+      return;
+    }
+    const newProduct = {
+      id: productListState.length + 1,        
+      ...product,
+    };
+    console.log(newProduct);
+    setProductListState((prev) => [...prev, newProduct]);
+    setProduct(emptyProduct);
+    close();
   }
 
   return (
@@ -73,6 +100,14 @@ function App() {
 
         <Modal isOpen={isOpen} close={close}>
           {renderFormInputs}
+           <div className="mt-4">
+              <Button
+                className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"
+                onClick={handleAddProduct}
+              >
+                submit
+              </Button>
+            </div>
         </Modal>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 align-items-center justify-items-center p-4">
           {productList}
