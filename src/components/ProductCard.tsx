@@ -2,6 +2,7 @@ import type { IProduct } from "../interfaces"
 import ImageComponent from "./ImageComponent"
 import Button from "./ui/Button"
 import { splitString } from "../utils"
+import ColorComponent from "./colorComponent"
 interface ProductCardProps {
   product:IProduct
 }
@@ -16,11 +17,9 @@ function ProductCard({product}: ProductCardProps) {
         <h2 className="font-semibold pl-2 text-lg">{title}</h2>
         <p className="font-extralight pl-2 text-gray-600 text-sm">{splitString(description,50)}</p>
         <div className="flex space-x-2 pl-2 ">
-             {colors.map((color,index)=>(
-              <span key={index} className={`w-5 h-5 rounded-full inline-block cursor-pointer`} style={{backgroundColor:color}} />
-             ))}
-             
-
+          {colors.map((color)=>(
+          <ColorComponent color={color} key={color} />
+          ))}
         </div>
         <div className="flex space-x-4 justify-between items-center px-4">
             <p>{price}</p>

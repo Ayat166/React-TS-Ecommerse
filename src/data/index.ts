@@ -112,3 +112,13 @@ export const formInputList: IFormInput[] = [
         placeholder: "Enter product image URL"
     },
 ]
+
+export const colors : string[] = [
+  "#000000",
+  "#FF0000",
+  "#00FF00",
+  "#0000FF",
+  "#FFFF00",
+  "#FFA500",
+  "#800080",
+];

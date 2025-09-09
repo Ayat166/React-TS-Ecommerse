@@ -1,11 +1,12 @@
 import ProductCard from "./components/ProductCard";
 import Modal from "./components/ui/Modal";
-import { formInputList, products } from "./data";
+import { colors, formInputList, products } from "./data";
 import Button from "./components/ui/Button";
 import { useState } from "react";
 import Input from "./components/ui/Input";
 import type { IProduct } from "./interfaces";
 import FormValidation from "./validations";
+import ColorComponent from "./components/ColorComponent";
 
 function App() {
   /*-------- Empty Product Template --------*/
@@ -22,6 +23,13 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(emptyProduct);
   const [productListState, setProductListState] = useState(products);
+  const [tempColor, setTempColor] = useState<string>("");
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    price: "",
+    imageUrl: "",
+  });
 
   /*-------- Render --------*/
   const productList = productListState.map((product) => (
@@ -41,9 +49,9 @@ function App() {
         value={product[input.name]}
         onChange={handleChange}
       />
+      {errors && <p className="text-red-500 text-sm">{errors[input.name]}</p>}
     </div>
   ));
-
 
   /*-------- Modal Handlers --------*/
   function open() {
@@ -69,14 +77,14 @@ function App() {
       description: product.description,
       price: product.price,
       imageUrl: product.imageUrl,
-    });  
+    });
     console.log(errors);
-    if (Object.values(errors).some((error) => error !== "")){
-      console.log("Validation failed. Please correct the errors and try again.");
+    if (Object.values(errors).some((error) => error !== "")) {
+      setErrors(errors);
       return;
     }
     const newProduct = {
-      id: productListState.length + 1,        
+      id: productListState.length + 1,
       ...product,
     };
     console.log(newProduct);
@@ -100,14 +108,19 @@ function App() {
 
         <Modal isOpen={isOpen} close={close}>
           {renderFormInputs}
-           <div className="mt-4">
-              <Button
-                className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"
-                onClick={handleAddProduct}
-              >
-                submit
-              </Button>
-            </div>
+          <div className="flex space-x-2 mt-2">
+            {colors.map((color) => (
+              <ColorComponent color={color} key={color} />
+            ))}
+          </div>
+          <div className="mt-4">
+            <Button
+              className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"
+              onClick={handleAddProduct}
+            >
+              submit
+            </Button>
+          </div>
         </Modal>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 align-items-center justify-items-center p-4">
           {productList}
