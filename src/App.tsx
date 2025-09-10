@@ -22,6 +22,7 @@ function App() {
 
   /*-------- Modal State --------*/
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(emptyProduct);
   const [productListState, setProductListState] = useState(products);
   const [tempColor, setTempColor] = useState<string[]>([]);
@@ -32,10 +33,10 @@ function App() {
     price: "",
     imageUrl: "",
   });
-
+  const [productToEdit, setProductToEdit] = useState<IProduct>(productListState[0]);
   /*-------- Render --------*/
   const productList = productListState.map((product) => (
-    <ProductCard key={product.id} product={product} />
+    <ProductCard key={product.id} product={product} setProductToEdit={setProductToEdit} openEdit={openEdit}/>
   ));
   const renderFormInputs = formInputList.map((input) => (
     <div key={input.id} className="flex flex-col gap-2">
@@ -54,6 +55,23 @@ function App() {
       {errors && <p className="text-red-500 text-sm">{errors[input.name]}</p>}
     </div>
   ));
+  const renderFormEditInputs = formInputList.map((input) => (
+    <div key={input.id} className="flex flex-col gap-2">
+      <label htmlFor={input.name} className="text-sm font-medium text-gray-700">
+        {input.label}
+      </label>
+      <Input
+        type={input.type}
+        name={input.name}
+        id={input.name}
+        placeholder={input.placeholder}
+        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        value={productToEdit[input.name]}
+        onChange={handleEditChange}
+      />
+      {errors && <p className="text-red-500 text-sm">{errors[input.name]}</p>}
+    </div>
+  ));
 
   /*-------- Modal Handlers --------*/
   function open() {
@@ -64,13 +82,31 @@ function App() {
     setIsOpen(false);
   }
 
+  function openEdit() {
+    setIsEditOpen(true);
+  }
+
+  function closeEdit() {
+    setIsEditOpen(false);
+  }
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setProduct((prev) => ({
       ...prev,
       [name]: value,
     }));
-    // console.log(product);
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  }
+  function handleEditChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setProductToEdit((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
     setErrors({
       ...errors,
       [name]: "",
@@ -84,7 +120,6 @@ function App() {
       price: product.price,
       imageUrl: product.imageUrl,
     });
-    console.log(errors);
     if (Object.values(errors).some((error) => error !== "")) {
       setErrors(errors);
       return;
@@ -95,22 +130,52 @@ function App() {
       colors: tempColor,
       category: selectedCategory,
     };
-    console.log(newProduct);
     setTempColor([]);
     setProductListState((prev) => [...prev, newProduct]);
     setProduct(emptyProduct);
     close();
   }
-  function toggleColor(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) {
-    const selectedColor = e.currentTarget.style.backgroundColor;
-    setTempColor((prev) => {
-      if (prev.includes(selectedColor)) {
-        return prev.filter((color) => color !== selectedColor);
-      } else {
-        return [...prev, selectedColor];
-      }     
-    })
+  function handleEditProduct() {
+    const errors = FormValidation({
+      title: productToEdit.title,
+      description: productToEdit.description,
+      price: productToEdit.price,
+      imageUrl: productToEdit.imageUrl,
+    });
+    if (Object.values(errors).some((error) => error !== "")) {
+      setErrors(errors);
+      return;
+    }
+    const editedProduct = {
+      ...productToEdit,
+      colors: productToEdit.colors.concat(tempColor),
+      category: selectedCategory,
+    };
+    setTempColor([]);
+    setProductListState((prev) =>
+      prev.map((prod) => (prod.id === editedProduct.id ? editedProduct : prod))
+    );
+    setProductToEdit(emptyProduct);
+    closeEdit();
   }
+  function toggleColor(selectedColor: string, edit: boolean = false) {
+    if (edit) {
+      setProductToEdit((prev) => ({
+        ...prev,
+        colors: prev.colors.includes(selectedColor)
+          ? prev.colors.filter((c) => c !== selectedColor)
+          : [...prev.colors, selectedColor],
+      }));
+    } else {
+      setTempColor((prev) =>
+        prev.includes(selectedColor)
+          ? prev.filter((c) => c !== selectedColor)
+          : [...prev, selectedColor]
+      );
+    }
+  }
+
+
 
   return (
     <>
@@ -134,14 +199,14 @@ function App() {
                 <ColorComponent
                   color={color}
                   key={color}
-                  onClick={toggleColor}
+                  onClick={() => toggleColor(color)}
                 />
               ))}
             </div>
           )}
           <div className="flex space-x-2 mt-2">
             {colors.map((color) => (
-              <ColorComponent color={color} key={color} onClick={toggleColor}/>
+              <ColorComponent color={color} key={color} onClick={() => toggleColor(color)}/>
             ))}
           </div>
           <DropdownList data={categories} setSelectedCategory={setselectedCategory}/>
@@ -154,6 +219,38 @@ function App() {
             </Button>
           </div>
         </Modal>
+
+        {productToEdit && (
+          <Modal isOpen={isEditOpen} close={closeEdit}>
+            {renderFormEditInputs}
+            {tempColor && (
+            <div className="flex space-x-2 mt-2">
+              <p className="self-center">Selected Colors:</p>
+              {productToEdit.colors.concat(tempColor).map((color) => (
+                <ColorComponent
+                  color={color}
+                  key={color}
+                  onClick={() => toggleColor(color, true)}
+                />
+              ))}
+            </div>
+            )}
+            <div className="flex space-x-2 mt-2">
+              {colors.map((color) => (
+                <ColorComponent color={color} key={color} onClick={() => toggleColor(color, true)}/>
+              ))}
+            </div>
+            <DropdownList data={categories} setSelectedCategory={setselectedCategory}/>
+            <div className="mt-4">
+              <Button
+                className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"
+                onClick={handleEditProduct}
+              >
+                Edit
+              </Button>
+            </div>
+          </Modal>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 align-items-center justify-items-center p-4">
           {productList}
         </div>

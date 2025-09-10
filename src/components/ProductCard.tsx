@@ -2,12 +2,14 @@ import type { IProduct } from "../interfaces"
 import ImageComponent from "./ImageComponent"
 import Button from "./ui/Button"
 import { splitString } from "../utils"
-import ColorComponent from "./colorComponent"
+import ColorComponent from "./ColorComponent"
 interface ProductCardProps {
-  product:IProduct
+  product:IProduct,
+  setProductToEdit: (product:IProduct)=>void,
+  openEdit: ()=>void
 }
 
-function ProductCard({product}: ProductCardProps) {
+function ProductCard({product,setProductToEdit,openEdit}: ProductCardProps) {
 
   const {title,description,price,imageUrl,colors,category}=product;
 
@@ -26,7 +28,11 @@ function ProductCard({product}: ProductCardProps) {
             <ImageComponent src={category.imageUrl} alt={category.name} className="w-10 h-10 rounded-full "/>
         </div>
         <div className="flex space-x-2 justify-between items-center p-2">
-            <Button className=" bg-blue-800" width="w-full" >Edit</Button>
+            <Button className=" bg-blue-800" width="w-full" onClick={(event)=>{
+              event.preventDefault();
+              setProductToEdit(product);
+              openEdit();
+            }}>Edit</Button>
             <Button className=" bg-red-800" width="w-full">Distroy</Button>
         </div>
     </div>
