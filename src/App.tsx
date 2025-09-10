@@ -1,12 +1,13 @@
 import ProductCard from "./components/ProductCard";
 import Modal from "./components/ui/Modal";
-import { colors, formInputList, products } from "./data";
+import { categories, colors, formInputList, products } from "./data";
 import Button from "./components/ui/Button";
 import { useState } from "react";
 import Input from "./components/ui/Input";
 import type { IProduct } from "./interfaces";
 import FormValidation from "./validations";
 import ColorComponent from "./components/ColorComponent";
+import DropdownList from "./components/ui/DropdownList";
 
 function App() {
   /*-------- Empty Product Template --------*/
@@ -24,6 +25,7 @@ function App() {
   const [product, setProduct] = useState<IProduct>(emptyProduct);
   const [productListState, setProductListState] = useState(products);
   const [tempColor, setTempColor] = useState<string[]>([]);
+  const [selectedCategory, setselectedCategory] = useState(categories[0]);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -91,6 +93,7 @@ function App() {
       id: productListState.length + 1,
       ...product,
       colors: tempColor,
+      category: selectedCategory,
     };
     console.log(newProduct);
     setTempColor([]);
@@ -141,6 +144,7 @@ function App() {
               <ColorComponent color={color} key={color} onClick={toggleColor}/>
             ))}
           </div>
+          <DropdownList data={categories} setSelectedCategory={setselectedCategory}/>
           <div className="mt-4">
             <Button
               className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"

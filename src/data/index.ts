@@ -1,4 +1,4 @@
-import type { IFormInput, IProduct } from "../interfaces";
+import type { ICategory, IFormInput, IProduct } from "../interfaces";
 
 export const products : IProduct []= [
     {
@@ -122,3 +122,21 @@ export const colors : string[] = [
   "#FFA500",
   "#800080",
 ];
+
+export const categories : ICategory [] = [
+    {
+        id: 1,
+        name: "Car",
+        imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg"
+    },
+    {
+        id: 2,
+        name: "Clothes",
+        imageUrl: "https://img.freepik.com/free-photo/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.jpg?semt=ais_hybrid&w=740&q=80"
+    },
+    {
+        id: 3,
+        name: "Phone",
+        imageUrl: "https://cdn.mos.cms.futurecdn.net/hf2CQvHr9KNtKuUSDkeQVH.jpg"
+    }
+]
