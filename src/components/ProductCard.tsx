@@ -6,10 +6,12 @@ import ColorComponent from "./ColorComponent"
 interface ProductCardProps {
   product:IProduct,
   setProductToEdit: (product:IProduct)=>void,
-  openEdit: ()=>void
+  openEdit: ()=>void,
+  setProductToDelete: (product:IProduct)=>void,
+  openDelete: ()=>void,
 }
 
-function ProductCard({product,setProductToEdit,openEdit}: ProductCardProps) {
+function ProductCard({product,setProductToEdit,openEdit,setProductToDelete,openDelete}: ProductCardProps) {
 
   const {title,description,price,imageUrl,colors,category}=product;
 
@@ -28,12 +30,16 @@ function ProductCard({product,setProductToEdit,openEdit}: ProductCardProps) {
             <ImageComponent src={category.imageUrl} alt={category.name} className="w-10 h-10 rounded-full "/>
         </div>
         <div className="flex space-x-2 justify-between items-center p-2">
-            <Button className=" bg-blue-800" width="w-full" onClick={(event)=>{
+            <Button className=" bg-blue-600" width="w-full" onClick={(event)=>{
               event.preventDefault();
               setProductToEdit(product);
               openEdit();
             }}>Edit</Button>
-            <Button className=" bg-red-800" width="w-full">Distroy</Button>
+            <Button className=" bg-red-600" width="w-full" onClick={(event)=>{
+              event.preventDefault();
+              setProductToDelete(product);
+              openDelete();
+            }}>Distroy</Button>
         </div>
     </div>
   )

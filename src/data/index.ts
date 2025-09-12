@@ -4,8 +4,8 @@ export const products : IProduct []= [
     {
         id: 1,
         title: "Product 1",
-        price: "$19.99",
-        description: "This is a description for Product 1 Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
+        price: "19.99",
+        description: "This is a description for Product 1  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
         imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg",
         colors: ["#000000", "#FF0000", "#00FF00"],
         category :{
@@ -17,8 +17,8 @@ export const products : IProduct []= [
     {
         id: 2,
         title: "Product 2",
-        price: "$29.99",
-        description: "This is a description for Product 2 Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
+        price: "29.99",
+        description: "This is a description for Product 2  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
         imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg",
         colors: ["#000000", "#FF0000", "#00FF00"],
         category :{
@@ -30,8 +30,8 @@ export const products : IProduct []= [
     {
         id: 3,
         title: "Product 3",
-        price: "$39.99",
-        description: "This is a description for Product 3 Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
+        price: "39.99",
+        description: "This is a description for Product 3  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
         imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg",
         colors: ["#000000", "#FF0000", "#00FF00"],
         category :{
@@ -43,8 +43,8 @@ export const products : IProduct []= [
     {
         id: 4,
         title: "Product 4",
-        price: "$19.99",
-        description: "This is a description for Product 4 Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
+        price: "19.99",
+        description: "This is a description for Product 4  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
         imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg",
         colors: ["#000000", "#FF0000", "#00FF00"],
         category :{
@@ -56,8 +56,8 @@ export const products : IProduct []= [
     {
         id: 5,
         title: "Product 5",
-        price: "$29.99",
-        description: "This is a description for Product 5 Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
+        price: "29.99",
+        description: "This is a description for Product 5  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
         imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg",
         colors: ["#000000", "#FF0000", "#00FF00"],
         category :{
@@ -69,8 +69,8 @@ export const products : IProduct []= [
     {
         id: 6,
         title: "Product 6",
-        price: "$39.99",
-        description: "This is a description for Product 6 Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
+        price: "39.99",
+        description: "This is a description for Product 6  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo tempora commodi nemo facilis pariatur? Quasi beatae porro, in ad esse rerum obcaecati molestiae aspernatur molestias magni veniam, libero laudantium sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt tenetur saepe officia! Libero saepe error hic cupiditate alias illum, cumque sapiente atque aut expedita aliquid deserunt culpa odit quod pariatur iure repellat, possimus assumenda eligendi temporibus dolorum fuga? Culpa earum, repellat at maxime doloribus perferendis eveniet quisquam molestias ut quaerat!",
         imageUrl: "https://media.architecturaldigest.com/photos/66a914f1a958d12e0cc94a8e/16:9/w_1280,c_limit/DSC_5903.jpg",
         colors: ["#000000", "#FF0000", "#00FF00"],
         category :{
@@ -132,7 +132,7 @@ export const categories : ICategory [] = [
     {
         id: 2,
         name: "Clothes",
-        imageUrl: "https://img.freepik.com/free-photo/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.jpg?semt=ais_hybrid&w=740&q=80"
+        imageUrl: "https://img.freepik.com/free-photo/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.jpg"
     },
     {
         id: 3,

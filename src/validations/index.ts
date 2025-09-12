@@ -15,10 +15,10 @@ export default function FormValidation({
     price: "",
     imageUrl: "",
   };
-  if (title.trim().length < 10 || title.trim().length > 80) {
+  if (title.trim().length < 5 || title.trim().length > 80) {
     errors.title = "Title is required and must be between 10 & 80 chars.";
   }
-  if (description.trim().length < 20 || description.trim().length > 200) {
+  if (description.trim().length < 20 ) {
     errors.description = "Description is required and must be between 20 & 200 chars.";
   }
   if (isNaN(Number(price)) || Number(price) <= 0) {

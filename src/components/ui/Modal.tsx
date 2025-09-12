@@ -4,9 +4,10 @@ interface ModalProps {
     isOpen: boolean;
     close: () => void;
     children?: React.ReactNode;
+    title: string;
 }
 
-function Modal({isOpen,close,children}:ModalProps) {
+function Modal({isOpen,close,children,title}:ModalProps) {
 
   return (
     <>
@@ -18,7 +19,7 @@ function Modal({isOpen,close,children}:ModalProps) {
               className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
             >
               <DialogTitle as="h3" className="text-base/7 font-medium mb-5">
-                Product Details
+                {title}
               </DialogTitle>
               {/* 
               <p className="mt-2 text-sm/6 ">

@@ -27,6 +27,8 @@ function App() {
   const [productListState, setProductListState] = useState(products);
   const [tempColor, setTempColor] = useState<string[]>([]);
   const [selectedCategory, setselectedCategory] = useState(categories[0]);
+  const [productToDelete, setProductToDelete] = useState<IProduct | null>(null);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -36,7 +38,7 @@ function App() {
   const [productToEdit, setProductToEdit] = useState<IProduct>(productListState[0]);
   /*-------- Render --------*/
   const productList = productListState.map((product) => (
-    <ProductCard key={product.id} product={product} setProductToEdit={setProductToEdit} openEdit={openEdit}/>
+    <ProductCard key={product.id} product={product} setProductToEdit={setProductToEdit} openEdit={openEdit} setProductToDelete={setProductToDelete} openDelete={openDelete}/>
   ));
   const renderFormInputs = formInputList.map((input) => (
     <div key={input.id} className="flex flex-col gap-2">
@@ -88,6 +90,12 @@ function App() {
 
   function closeEdit() {
     setIsEditOpen(false);
+  }
+  function openDelete() {
+    setIsDeleteOpen(true);
+  }
+  function closeDelete() {
+    setIsDeleteOpen(false);
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -174,6 +182,15 @@ function App() {
       );
     }
   }
+  function deleteProduct() {
+    if (productToDelete) {
+      setProductListState((prev) =>
+        prev.filter((prod) => prod.id !== productToDelete.id)
+      );
+      setProductToDelete(null);
+      closeEdit();
+    }
+  }
 
 
 
@@ -190,7 +207,7 @@ function App() {
           </Button>
         </div>
 
-        <Modal isOpen={isOpen} close={close}>
+        <Modal isOpen={isOpen} close={close} title={"Add New Product"}>
           {renderFormInputs}
           {tempColor && (
             <div className="flex space-x-2 mt-2">
@@ -213,15 +230,43 @@ function App() {
           <div className="mt-4">
             <Button
               className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700 align-content-center justify-center"
-              onClick={handleAddProduct}
+              onClick={(event)=>{
+              event.preventDefault();
+              handleAddProduct();
+            }}
             >
               Submit
             </Button>
           </div>
         </Modal>
 
+        <Modal isOpen={isDeleteOpen} close={closeDelete} title={"Delete Product"}>
+          <div className="p-4">
+            <h2 className="text-lg font-medium mb-4">Confirm Deletion</h2>
+            <p>Are you sure you want to delete this product?</p>
+            <div className="flex justify-end space-x-2 mt-4">
+              <Button
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md"
+                onClick={closeDelete}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="bg-red-600 text-white px-4 py-2 rounded-md"
+                onClick={()=>{
+                  deleteProduct();
+                  closeDelete();
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+          
+        </Modal>
+
         {productToEdit && (
-          <Modal isOpen={isEditOpen} close={closeEdit}>
+          <Modal isOpen={isEditOpen} close={closeEdit} title={"Edit Product"}>
             {renderFormEditInputs}
             {tempColor && (
             <div className="flex space-x-2 mt-2">
