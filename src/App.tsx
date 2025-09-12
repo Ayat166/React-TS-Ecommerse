@@ -8,6 +8,8 @@ import type { IProduct } from "./interfaces";
 import FormValidation from "./validations";
 import ColorComponent from "./components/ColorComponent";
 import DropdownList from "./components/ui/DropdownList";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function App() {
   /*-------- Empty Product Template --------*/
@@ -140,6 +142,7 @@ function App() {
     };
     setTempColor([]);
     setProductListState((prev) => [...prev, newProduct]);
+    toast.success("Product added successfully");
     setProduct(emptyProduct);
     close();
   }
@@ -163,6 +166,7 @@ function App() {
     setProductListState((prev) =>
       prev.map((prod) => (prod.id === editedProduct.id ? editedProduct : prod))
     );
+    toast.success("Product edited successfully");
     setProductToEdit(emptyProduct);
     closeEdit();
   }
@@ -188,6 +192,7 @@ function App() {
         prev.filter((prod) => prod.id !== productToDelete.id)
       );
       setProductToDelete(null);
+      toast.success("Product deleted successfully");
       closeEdit();
     }
   }
@@ -319,6 +324,7 @@ function App() {
           )}
         </div>
       </main>
+      <Toaster />
     </>
   );
 }
