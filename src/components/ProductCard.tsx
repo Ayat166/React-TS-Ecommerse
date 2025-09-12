@@ -16,30 +16,74 @@ function ProductCard({product,setProductToEdit,openEdit,setProductToDelete,openD
   const {title,description,price,imageUrl,colors,category}=product;
 
   return (
-    <div className="border border-gray-200 rounded shadow align-items-center space-y-2">
-        <ImageComponent src={imageUrl} alt={title} className="p-1 rounded-lg"/>
-        <h2 className="font-semibold pl-2 text-lg">{title}</h2>
-        <p className="font-extralight pl-2 text-gray-600 text-sm">{splitString(description,50)}</p>
-        <div className="flex space-x-2 pl-2 ">
-          {colors.map((color)=>(
-          <ColorComponent color={color} key={color} />
-          ))}
+    <div className="group relative bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden">
+        <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+            <ImageComponent 
+                src={imageUrl} 
+                alt={title} 
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
+            />
         </div>
-        <div className="flex space-x-4 justify-between items-center px-4">
-            <p>{price}</p>
-            <ImageComponent src={category.imageUrl} alt={category.name} className="w-10 h-10 rounded-full "/>
+        
+        <div className="p-4 space-y-3">
+            <div className="flex items-start justify-between">
+                <h2 className="font-semibold text-lg text-gray-900 line-clamp-1">{title}</h2>
+                <span className="text-sm font-bold text-blue-600 ml-2">${price}</span>
+            </div>
+            
+            <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">{splitString(description, 60)}</p>
+            
+            <div className="flex items-center space-x-2">
+                <span className="text-xs text-gray-500">Colors:</span>
+                <div className="flex space-x-1">
+                    {colors.slice(0, 5).map((color) => (
+                        <ColorComponent 
+                            color={color} 
+                            key={color} 
+                            className="w-4 h-4 ring-2 ring-white shadow-sm"
+                        />
+                    ))}
+                    {colors.length > 5 && (
+                        <span className="text-xs text-gray-400">+{colors.length - 5}</span>
+                    )}
+                </div>
+            </div>
+            
+            <div className="flex items-center space-x-2 pt-2 border-t border-gray-100">
+                <ImageComponent 
+                    src={category.imageUrl} 
+                    alt={category.name} 
+                    className="w-6 h-6 rounded-full object-cover"
+                />
+                <span className="text-xs text-gray-600 font-medium">{category.name}</span>
+            </div>
         </div>
-        <div className="flex space-x-2 justify-between items-center p-2">
-            <Button className=" bg-blue-600" width="w-full" onClick={(event)=>{
-              event.preventDefault();
-              setProductToEdit(product);
-              openEdit();
-            }}>Edit</Button>
-            <Button className=" bg-red-600" width="w-full" onClick={(event)=>{
-              event.preventDefault();
-              setProductToDelete(product);
-              openDelete();
-            }}>Distroy</Button>
+        
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/95 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="flex space-x-2">
+                <Button 
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm py-2" 
+                    width="w-full" 
+                    onClick={(event) => {
+                        event.preventDefault();
+                        setProductToEdit(product);
+                        openEdit();
+                    }}
+                >
+                    Edit
+                </Button>
+                <Button 
+                    className="bg-red-600 hover:bg-red-700 text-white text-sm py-2" 
+                    width="w-full" 
+                    onClick={(event) => {
+                        event.preventDefault();
+                        setProductToDelete(product);
+                        openDelete();
+                    }}
+                >
+                    Delete
+                </Button>
+            </div>
         </div>
     </div>
   )

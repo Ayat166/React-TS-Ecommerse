@@ -196,14 +196,20 @@ function App() {
 
   return (
     <>
-      <main className="container mx-auto lg:auto mt-5">
-        <div className="flex justify-end p-4">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Product Catalog</h1>
+            <p className="text-gray-600 mt-1">Manage your ecommerce products with ease</p>
+          </div>
           <Button
             onClick={open}
-            className="rounded-md bg-black/50 px-4 py-2 text-sm font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-black/30"
+            variant="primary"
+            size="md"
             width="w-fit"
+            className="shadow-sm"
           >
-            New Item
+            Add New Product
           </Button>
         </div>
 
@@ -296,8 +302,21 @@ function App() {
             </div>
           </Modal>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 align-items-center justify-items-center p-4">
-          {productList}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {productList.length > 0 ? productList : (
+            <div className="col-span-full text-center py-12">
+              <div className="text-gray-400 mb-4">
+                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No products yet</h3>
+              <p className="text-gray-600 mb-4">Get started by adding your first product</p>
+              <Button onClick={open} variant="outline" size="sm">
+                Add Product
+              </Button>
+            </div>
+          )}
         </div>
       </main>
     </>

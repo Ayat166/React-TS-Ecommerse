@@ -3,10 +3,15 @@ interface ImageComponentProps {
     alt: string;
     className?: string;
 }
+
 function ImageComponent({src,alt,className}:ImageComponentProps) {
   return (
-    <div>
-        <img src={src} alt={alt} className={className}/>
+    <div className="relative overflow-hidden bg-gray-100">
+        <img 
+            src={src} 
+            alt={alt} 
+            className={className}
+        />
     </div>
   )
 }
